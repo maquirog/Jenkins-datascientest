@@ -27,18 +27,18 @@ pipeline {
                 }
             }
         }
-        stage('User Acceptance') {
-            steps{
-                input (
-                    message: "Proceed to push to main", ok: "Yes"
-                )
-            }
-        }
+        // stage('User Acceptance') {
+        //     steps{
+        //         input (
+        //             message: "Proceed to push to main", ok: "Yes"
+        //         )
+        //     }
+        // }
         stage('Pushing and Merging'){
             parallel {
                 stage('Pushing Image') {
                     environment {
-                        DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_PASS')
+                        DOCKERHUB_CREDENTIALS = credentials("DOCKER_HUB_PASS")
                     }
                     steps {
                         sh 'echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKER_ID --password-stdin'
