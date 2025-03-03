@@ -38,10 +38,10 @@ pipeline {
             parallel {
                 stage('Pushing Image') {
                     environment {
-                        DOCKERHUB_CREDENTIALS = credentials('maquirog')
+                        DOCKERHUB_CREDENTIALS = credentials('DOCKER_HUB_PASS')
                     }
                     steps {
-                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        sh 'echo $DOCKERHUB_CREDENTIALS | docker login -u $DOCKER_ID --password-stdin'
                         sh 'docker push $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG'
                     }
                 }
